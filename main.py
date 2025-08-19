@@ -1,6 +1,7 @@
 # from urllib import response
 from fastapi import FastAPI, Depends, status, HTTPException, Query, Response,Query
 from fastapi.middleware.cors import CORSMiddleware
+import os
 # from sqlalchemy.orm import Session
 # from models import Department ,Teacher,Student,Subject,SubjectTeacher
 # from db import SessionLocal, engine
@@ -16,7 +17,8 @@ app = FastAPI()
 # ==========================
 origins = [
     "http://localhost:5173",
-    "http://127.0.0.1:5173"
+    "http://127.0.0.1:5173",
+    "https://attendance-manage-rdyu.vercel.app",
 ]
 
 app.add_middleware(
@@ -42,4 +44,5 @@ app.include_router(attendance.router)
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
