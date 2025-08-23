@@ -8,8 +8,8 @@ import os
 # import schemas,models
 
 
-from routers import department, teacher, student, subject,sub_teacher,slot,comp,authentication,attendance
-
+from routers import department, teacher, student, subject,sub_teacher,slot,comp,authentication,attendance,routine,notice
+# from fastapi.staticfiles import StaticFiles
 app = FastAPI()
 
 # ==========================
@@ -30,7 +30,7 @@ app.add_middleware(
     expose_headers=["Content-Range"]  # important
 )
 
-
+# app.mount("/static", StaticFiles(directory="uploads"), name="static")
 # ==========================
 app.include_router(authentication.router)
 app.include_router(comp.router)
@@ -41,6 +41,8 @@ app.include_router(subject.router)
 app.include_router(sub_teacher.router)
 app.include_router(slot.router)
 app.include_router(attendance.router)
+app.include_router(routine.router)
+app.include_router(notice.router)
 
 if __name__ == "__main__":
     import uvicorn
