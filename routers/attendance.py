@@ -50,7 +50,6 @@ async def get_attendance(stid: int, dt: date, db: Session = Depends(get_db)):
             # models.Subject.sub_name 
         )
         .join(models.Student, models.Attendance.Sid == models.Student.Sid)
-        # .join(models.Subject, models.Attendance.STid == models.Subject.STid)
         .filter(
             models.Attendance.STid == stid,
             models.Attendance.date == dt
