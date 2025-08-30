@@ -10,6 +10,36 @@ router = APIRouter(
     tags=["Routine"]
 )
 
+@router.get("/{email}")
+def teacher_routines(email: str, db: Session = Depends(get_db)):
+    routines = (
+        db.query(models.Routine)
+        .join(models.SubjectTeacher, models.Routine.STid == models.SubjectTeacher.STid)
+        .join(models.Subject, models.SubjectTeacher.Sub_id == models.Subject.Sub_id)
+        .join(models.Teacher, models.SubjectTeacher.Tid == models.Teacher.Tid)
+        .filter(models.Teacher.email == email)
+        .all()
+    )
+
+    if not routines:
+        raise HTTPException(status_code=404, detail="No routines found for this teacher")
+
+    result = []
+    for r in routines:
+        result.append({
+            "routine_id": r.R_id,
+            "subject": r.subject_teacher.subject.sub_name,   # via relationships
+            "teacher": r.subject_teacher.teacher.name,
+            "teacher_code": r.subject_teacher.teacher.name_code, # via relationships
+            "department": r.subject_teacher.subject.department.dep,
+            "semester": r.subject_teacher.subject.sem,
+            "slot": r.Sl_id,
+            "day": r.day
+        })
+
+    return result
+
+
 @router.get("/{dep},{sem}")
 def get_routines(dep: str, sem: int, db: Session = Depends(get_db)):
 
