@@ -2,7 +2,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
-from routers import department, teacher, student, subject,sub_teacher,slot,comp,authentication,attendance,routine,notice
+from routers import department, teacher, student, subject,sub_teacher,slot,comp,authentication,attendance,routine,notice , helper
 # from fastapi.staticfiles import StaticFiles
 app = FastAPI()
 
@@ -37,6 +37,7 @@ app.include_router(slot.router)
 app.include_router(attendance.router)
 app.include_router(routine.router)
 app.include_router(notice.router)
+app.include_router(helper.router)
 
 if __name__ == "__main__":
     import uvicorn
