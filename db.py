@@ -6,8 +6,9 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 # DATABASE_URL = "mysql+pymysql://root:0070100@localhost:3306/test_db"
 # DATABASE_URL = "mysql+pymysql://root:0070100@localhost:3306/attendance"
 
-DATABASE_URL = "mysql+pymysql://root:ymIHbzqthbAhsLpHESxNLofBfXPqPDQT@hopper.proxy.rlwy.net:56912/railway"
+# DATABASE_URL = "mysql+pymysql://root:ymIHbzqthbAhsLpHESxNLofBfXPqPDQT@hopper.proxy.rlwy.net:56912/railway"
 
+DATABASE_URL = "mysql+pymysql://root:pwKZoHbrXTzbSMQkzTkmEExMVGUzyIRQ@ballast.proxy.rlwy.net:40212/railway"
 
 
 engine = create_engine(DATABASE_URL)
