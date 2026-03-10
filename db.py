@@ -4,12 +4,11 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 
 # Replace with your actual DB details
 # DATABASE_URL = "mysql+pymysql://root:0070100@localhost:3306/test_db"
-DATABASE_URL = "mysql+pymysql://root:0070100@localhost:3306/attendance"
+# DATABASE_URL = "mysql+pymysql://root:0070100@localhost:3306/attendance"
 
 # DATABASE_URL = "mysql+pymysql://root:ymIHbzqthbAhsLpHESxNLofBfXPqPDQT@hopper.proxy.rlwy.net:56912/railway"
-
 # DATABASE_URL = "mysql+pymysql://root:pwKZoHbrXTzbSMQkzTkmEExMVGUzyIRQ@ballast.proxy.rlwy.net:40212/railway"
-
+DATABASE_URL = "mysql+pymysql://root:FsnyKIIXbJOiySCqCxAStjqRTaYOwaAn@ballast.proxy.rlwy.net:39534/railway"
 
 engine = create_engine(DATABASE_URL)
 
