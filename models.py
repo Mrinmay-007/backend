@@ -4,7 +4,7 @@
 
 from sqlalchemy import Column, Integer, String, ForeignKey, Time, Date, DateTime, Enum, UniqueConstraint, Text, CheckConstraint,LargeBinary
 from sqlalchemy.orm import relationship
-from db import Base
+from db import Base 
 from datetime import datetime
 
 class Department(Base):

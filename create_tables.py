@@ -1,12 +1,13 @@
 # create_tables.py
 from db import engine, Base, SessionLocal
+# from .db import engine, Base, SessionLocal
 import models
 from methods.hashing import Hash
 import json
 
 
-models.Base.metadata.create_all(bind=engine)
-
+# models.Base.metadata.create_all(bind=engine)
+# Base.metadata.create_all(bind=engine)
 
 with open('pw.json', "r") as file:
     data = json.load(file)
@@ -47,3 +48,4 @@ def insert_defaults():
         db.close()
 
 insert_defaults()
+

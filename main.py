@@ -2,10 +2,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
+from init_db import insert_defaults
 from routers import department, teacher, student, subject,sub_teacher,slot,comp,authentication,attendance,routine,notice , helper
 # from fastapi.staticfiles import StaticFiles
-app = FastAPI()
+from db import engine, Base
 
+app = FastAPI()
+Base.metadata.create_all(bind=engine)
 # ==========================
 # CORS setup
 # ==========================
@@ -26,6 +29,14 @@ app.add_middleware(
 )
 
 # app.mount("/static", StaticFiles(directory="uploads"), name="static")
+
+@app.on_event("startup")
+def startup():
+    # 1️⃣ Create tables
+    Base.metadata.create_all(bind=engine)
+
+    # 2️⃣ Insert default data
+    insert_defaults()
 # ==========================
 app.include_router(authentication.router)
 app.include_router(comp.router)
