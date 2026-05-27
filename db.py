@@ -2,15 +2,29 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
-# Replace with your actual DB details
-# DATABASE_URL = "mysql+pymysql://root:0070100@localhost:3306/test_db"
-# DATABASE_URL = "mysql+pymysql://root:0070100@localhost:3306/attendance"
-# DATABASE_URL = "mysql+pymysql://root:0070100@localhost:3306/test"
-DATABASE_URL = 'mysql+pymysql://root:ytJKwHJKdGLchjjlvZwcNMCjhOxexyAa@junction.proxy.rlwy.net:22751/railway'
-# DATABASE_URL = "mysql+pymysql://root:kntPHUZcmuFGVTOrgvAwtCHaaQxLCjQP@metro.proxy.rlwy.net:57591/railway"
-engine = create_engine(DATABASE_URL)
+# Aiven MySQL Database URL
 
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+# Create engine with SSL enabled
+engine = create_engine(
+    DATABASE_URL,
+    connect_args={
+        "ssl": {
+            "ssl_mode": "REQUIRED"
+        }
+    }
+)
+
+SessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine
+)
 
 Base = declarative_base()
 
@@ -21,4 +35,3 @@ def get_db():
         yield db
     finally:
         db.close()
-    
